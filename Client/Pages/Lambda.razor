@@ -1,0 +1,13 @@
+﻿@page "/Lambda"
+@inject HttpClient http
+
+<label>Resultado:@resultado </label>
+
+@code {
+    private string resultado = "Sin informacion";
+
+    protected override async Task OnInitializedAsync()
+    {
+        resultado = await http.GetStringAsync("api/Lambda");
+    }
+}

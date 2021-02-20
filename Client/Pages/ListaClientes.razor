@@ -1,0 +1,25 @@
+﻿@page "/ListaClientes"
+@using AppBlazorEF.Shared
+@inject HttpClient http
+
+
+
+<Lista cabeceras=cabecerasTabla listaDatos=listaClientes eventBusqueda=BusquedaCliente />
+
+
+@code {
+
+    string[] cabecerasTabla = { "Codigo", "Nombre", "Apellido", "Telefono" };
+    private ClienteCls[] listaClientes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaClientes = await http.GetFromJsonAsync<ClienteCls[]>("api/Clientes/Get");
+    }
+
+    public async Task BusquedaCliente(string data)
+    {
+        listaClientes = await http.GetFromJsonAsync<ClienteCls[]>("api/Cliente/Filtrar/" + data);
+    }
+
+}

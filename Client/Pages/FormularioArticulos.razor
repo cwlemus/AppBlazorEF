@@ -1,0 +1,50 @@
+﻿@page "/formularioArt" 
+@using AppBlazorEF.Shared
+
+<h3>Registro de articulos</h3>
+
+<form @onsubmit="Registrar">
+    <div class="form-group">
+        <label>Seleccione articulo a registrar</label>
+        <select class="form-control" @bind="cbxCategoria">
+            <option value="">--Seleccione--</option>
+            <option value="Hogar">Hogar</option>
+            <option value="Cosmeticos">Cosmeticos</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Alimentos">Alimentos</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ingrese articulo</label>
+        <input type="text" class="form-control" @bind="txtArticulo" />
+    </div>
+    <div class="form-group">
+        <label>Disponible a cliente</label>
+        <input type="checkbox" @bind="chkIsConsumo" />
+    </div>
+    <div class="form-group">        
+        <input type="submit" class="btn btn-primary" value="Registrar"/>
+    </div>
+</form>
+
+<ListaArticulos lista=lstArticulos/>
+
+@code {
+    public List<Articulo> lstArticulos = new List<Articulo>();
+    public string cbxCategoria { get; set; }
+    public string txtArticulo { get; set; }
+    public Boolean chkIsConsumo { get; set; }
+
+    public void Registrar()
+    {
+        lstArticulos.Add(
+            new Articulo
+            {
+                Categoria = cbxCategoria,
+                NombreArticulo = txtArticulo,
+                IsConsumo = chkIsConsumo
+            }
+        );
+    }
+
+}

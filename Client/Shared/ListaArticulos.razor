@@ -1,0 +1,33 @@
+﻿@using AppBlazorEF.Shared
+ 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Categoria</th>
+            <th>Articulo</th>
+            <th>Es Consumible</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in lista)
+        {
+            <tr>
+                <td>
+                    @item.Categoria
+                </td>
+                <td>
+                    @item.NombreArticulo
+                </td>
+                <td>
+                    @item.IsConsumo
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter]
+    public List<Articulo> lista { get; set; }
+}
